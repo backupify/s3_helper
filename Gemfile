@@ -1,14 +1,17 @@
 source "http://rubygems.org"
-# Add dependencies required to use your gem here.
-# Example:
-#   gem "activesupport", ">= 2.3.5"
 
-# Add dependencies to develop your gem here.
-# Include everything needed to run rake, tests, features, etc.
+gem 'activesupport', '>= 2.3.5'
+
 group :development do
-  gem "shoulda", ">= 0"
-  gem "rdoc", "~> 3.12"
-  gem "bundler", "~> 1.0.0"
-  gem "jeweler", "~> 1.8.4"
-  gem "rcov", ">= 0"
+  gem 'minitest-reporters'
+  gem 'test-unit'
+  gem 'shoulda'
+  gem 'mocha', '~> 0.12.1'
+  gem 'bundler'
+  gem 'jeweler'
+  gem 'rdoc'
+  gem 'fog'
+  gem 'excon'
+  gem 'exception_helper', :git => 'git@github.com:backupify/exception_helper.git'
+  gem 'log4r'
 end
