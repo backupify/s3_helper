@@ -19,11 +19,13 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
     "VERSION",
     "lib/s3_helper.rb",
+    "s3_helper.gemspec",
     "test/helper.rb",
     "test/unit/s3_helper_test.rb"
   ]
