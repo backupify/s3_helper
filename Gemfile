@@ -1,6 +1,10 @@
 source "http://rubygems.org"
 
 gem 'activesupport', '>= 2.3.5'
+gem 'exception_helper', :git => 'git@github.com:backupify/exception_helper.git'
+gem 'excon'
+gem 'fog'
+gem 'log4r'
 
 group :development do
   gem 'minitest-reporters'
@@ -10,8 +14,4 @@ group :development do
   gem 'bundler'
   gem 'jeweler'
   gem 'rdoc'
-  gem 'fog'
-  gem 'excon'
-  gem 'exception_helper', :git => 'git@github.com:backupify/exception_helper.git'
-  gem 'log4r'
 end
