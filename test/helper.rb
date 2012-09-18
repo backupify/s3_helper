@@ -13,7 +13,7 @@ require 'test/unit'
 require 'shoulda'
 require 'mocha'
 require 'fog'
-require 's3_helper'
+require_relative "../lib/s3_helper"
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))

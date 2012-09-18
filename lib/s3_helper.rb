@@ -15,13 +15,12 @@ module S3
     MAX_KEYS = 1000
 
     attr_accessor :directory
-    attr_reader :aws_access_key_id, :aws_secret_access_key
+    attr_reader :options
 
-    def initialize(bucket, aws_access_key_id, aws_secret_access_key)
+    def initialize(bucket, options = {})
       raise BlankBucketException.new unless bucket
 
-      @aws_access_key_id = aws_access_key_id
-      @aws_secret_access_key = aws_secret_access_key
+      @options = options
 
       connect!(bucket)
     end
@@ -205,7 +204,7 @@ module S3
 
     def walk_tree(prefix=nil)
       # Grab a new S3 connection since this method destroys the cached copy of files once the prefix is applied.
-      s3 = S3Helper.new(@directory.key, @aws_access_key_id, @aws_secret_access_key)
+      s3 = S3Helper.new(@directory.key, @options)
 
       iter = s3.directory.files
       iter.prefix = prefix if prefix
@@ -220,12 +219,13 @@ module S3
     def connect!(bucket)
       @bucket = bucket
 
-      @storage = Fog::Storage.new(
-        :provider => 'AWS',
-        :aws_access_key_id => @aws_access_key_id,
-        :aws_secret_access_key => @aws_secret_access_key,
-        :persistent => false
-      )
+      @storage_params = {:provider => 'AWS',
+                         :persistent => false
+                        }
+
+      @storage_params = @storage_params.merge(@options)
+
+      @storage = Fog::Storage.new(@storage_params)
 
       retry_on_failure(*RETRYABLE_EXCEPTIONS) do
         @directory = @storage.directories.find { |d| d.key == bucket }

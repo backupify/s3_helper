@@ -12,7 +12,7 @@ class S3HelperTest < Test::Unit::TestCase
     @connection.put_bucket('bucket')
     @connection.put_bucket_versioning('bucket', 'Enabled')
 
-    @helper = S3::S3Helper.new('bucket','key', 'secret')
+    @helper = S3::S3Helper.new('bucket', {:aws_access_key_id => 'key', :aws_secret_access_key => 'secret'})
   end
 
   teardown do
@@ -20,14 +20,11 @@ class S3HelperTest < Test::Unit::TestCase
   end
 
   should "require a bucket" do
-    assert_raise(S3::BlankBucketException) { S3::S3Helper.new(nil, 'key', 'secret') }
-    S3::S3Helper.new('bucket', 'key', 'secret')
+    assert_raise(S3::BlankBucketException) { S3::S3Helper.new(nil) }
   end
 
   should "connect on creation" do
-    s3 = S3::S3Helper.new('bucket', 'key', 'secret')
-
-    assert !s3.directory.nil?
+    assert !@helper.directory.nil?
   end
 
   context 'storing a file' do
