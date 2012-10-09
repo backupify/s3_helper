@@ -227,9 +227,9 @@ module S3
 
       @storage = Fog::Storage.new(@storage_params)
 
-      retry_on_failure(*RETRYABLE_EXCEPTIONS) do
-        @directory = @storage.directories.find { |d| d.key == bucket }
-      end
+      # This call looks misleading.  What we're doing is creating an in-memory representation of an existing bucket.
+      # The bucket :key will be used in operations related to interaction of files within the directory.
+      @directory = @storage.directories.new(:key => bucket)
     end
 
     def validate_path(path, filename)
