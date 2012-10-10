@@ -19,7 +19,6 @@ module S3
 
     def initialize(bucket, options = {})
       raise BlankBucketException.new unless bucket
-
       @options = options
 
       connect!(bucket)
@@ -221,9 +220,7 @@ module S3
 
       @storage_params = {:provider => 'AWS',
                          :persistent => false
-                        }
-
-      @storage_params = @storage_params.merge(@options)
+                        }.merge(@options)
 
       @storage = Fog::Storage.new(@storage_params)
 
