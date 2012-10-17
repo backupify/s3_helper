@@ -23,7 +23,7 @@ class Test::Unit::TestCase
   # This allows you to redefine a constant for a given block.
   # It restores the original value to the constant after the block executes.
   # constant_name should be a string that includes the full path includes all parent classes and modules.
-  # for example: "S3::S3Helper::MAX_KEYS"
+  # for example: "S3::Helper::MAX_KEYS"
   def redefine_constant(constant_name, constant_value)
     constant_class = constant_name.split(/::/)[0..-2].join('::').constantize rescue Object
     constant_variable_name = constant_name.split(/::/).last

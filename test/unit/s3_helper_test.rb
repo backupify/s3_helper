@@ -12,7 +12,7 @@ class S3HelperTest < Test::Unit::TestCase
     @connection.put_bucket('bucket')
     @connection.put_bucket_versioning('bucket', 'Enabled')
 
-    @helper = S3::S3Helper.new('bucket', {:aws_access_key_id => 'key', :aws_secret_access_key => 'secret'})
+    @helper = S3::Helper.new('bucket', {:aws_access_key_id => 'key', :aws_secret_access_key => 'secret'})
   end
 
   teardown do
@@ -20,7 +20,7 @@ class S3HelperTest < Test::Unit::TestCase
   end
 
   should "require a bucket" do
-    assert_raise(S3::BlankBucketException) { S3::S3Helper.new(nil) }
+    assert_raise(S3::BlankBucketException) { S3::Helper.new(nil) }
   end
 
   should "connect on creation" do
@@ -327,7 +327,7 @@ class S3HelperTest < Test::Unit::TestCase
   end
 
   #should "calculate size of all objects by prefix" do
-  #  redefine_constant("S3::S3Helper::MAX_KEYS", 3) do
+  #  redefine_constant("S3::Helper::MAX_KEYS", 3) do
   #
   #    @connection.put_object('bucket', 'path/a/1', 'x' * 105)
   #    @connection.put_object('bucket', 'path/a/2', 'x' * 835)
@@ -339,7 +339,7 @@ class S3HelperTest < Test::Unit::TestCase
   #end
   #
   #should "return a hash of filename => size" do
-  #  redefine_constant("S3::S3Helper::MAX_KEYS", 3) do
+  #  redefine_constant("S3::Helper::MAX_KEYS", 3) do
   #
   #    @connection.put_object('bucket', 'path/a/1', 'x' * 105)
   #    @connection.put_object('bucket', 'path/a/2', 'x' * 835)
@@ -358,7 +358,7 @@ class S3HelperTest < Test::Unit::TestCase
   #end
   #
   #should "yield each s3 file metadata entry for a given prefix" do
-  #  redefine_constant("S3::S3Helper::MAX_KEYS", 3) do
+  #  redefine_constant("S3::Helper::MAX_KEYS", 3) do
   #
   #    fake_now = Time.parse('2011-11-15 17:06:34 -0500')
   #    Time.stubs(:now).returns(fake_now)

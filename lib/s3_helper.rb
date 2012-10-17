@@ -203,7 +203,7 @@ module S3
 
     def walk_tree(prefix=nil)
       # Grab a new S3 connection since this method destroys the cached copy of files once the prefix is applied.
-      s3 = S3Helper.new(@directory.key, @options)
+      s3 = Helper.new(@directory.key, @options)
 
       iter = s3.directory.files
       iter.prefix = prefix if prefix
@@ -219,7 +219,8 @@ module S3
       @bucket = bucket
 
       @storage_params = {:provider => 'AWS',
-                         :persistent => false
+                         :persistent => false,
+                         :connection_options => { :retry_limit => 0 }
                         }.merge(@options)
 
       @storage = Fog::Storage.new(@storage_params)
