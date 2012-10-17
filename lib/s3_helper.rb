@@ -220,6 +220,8 @@ module S3
 
       @storage_params = {:provider => 'AWS',
                          :persistent => false,
+                         :aws_access_key_id => '',
+                         :aws_secret_access_key => '',
                          :connection_options => { :retry_limit => 0 }
                         }.merge(@options)
 
