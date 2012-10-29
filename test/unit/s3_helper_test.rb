@@ -12,7 +12,7 @@ class S3HelperTest < Test::Unit::TestCase
     @connection.put_bucket('bucket')
     @connection.put_bucket_versioning('bucket', 'Enabled')
 
-    @helper = S3Helper.new('bucket', {:aws_access_key_id => 'key', :aws_secret_access_key => 'secret'})
+    @helper = S3::Helper.new('bucket', {:aws_access_key_id => 'key', :aws_secret_access_key => 'secret'})
   end
 
   teardown do
@@ -20,7 +20,7 @@ class S3HelperTest < Test::Unit::TestCase
   end
 
   should "require a bucket" do
-    assert_raise(S3Helper::BlankBucketException) { S3Helper.new(nil) }
+    assert_raise(S3::BlankBucketException) { S3::Helper.new(nil) }
   end
 
   should "connect on creation" do
@@ -29,7 +29,7 @@ class S3HelperTest < Test::Unit::TestCase
 
   context 'storing a file' do
     should 'require a filename' do
-      assert_raise(S3Helper::BlankFileNameException) { @helper.store("path", nil, "data") }
+      assert_raise(S3::BlankFileNameException) { @helper.store("path", nil, "data") }
     end
 
     should "store a file without a path" do
@@ -91,7 +91,7 @@ class S3HelperTest < Test::Unit::TestCase
 
   context 'fetching a file' do
     should 'require a filename' do
-      assert_raise(S3Helper::BlankFileNameException) { @helper.fetch("path", nil) }
+      assert_raise(S3::BlankFileNameException) { @helper.fetch("path", nil) }
     end
 
     should "fetch a file without a path" do
@@ -235,7 +235,7 @@ class S3HelperTest < Test::Unit::TestCase
   should "stream a file" do
     yielded_value = nil
     @connection.put_object('bucket', 'path/filename', 'my chunk')
-    
+
     @helper.fetch("path", "filename", {}) { |chunk| yielded_value = chunk }
 
     assert_equal yielded_value, 'my chunk'
@@ -243,7 +243,7 @@ class S3HelperTest < Test::Unit::TestCase
 
   context 'deleting a file' do
     should 'require a filename' do
-      assert_raise(S3Helper::BlankFileNameException) { @helper.delete('path', nil) }
+      assert_raise(S3::BlankFileNameException) { @helper.delete('path', nil) }
     end
 
     should 'delete a file without a path' do
@@ -267,11 +267,11 @@ class S3HelperTest < Test::Unit::TestCase
 
   context 'rename a file' do
     should 'require a source filename' do
-      assert_raise(S3Helper::BlankFileNameException) { @helper.rename('path', nil, 'new_filename') }
+      assert_raise(S3::BlankFileNameException) { @helper.rename('path', nil, 'new_filename') }
     end
 
     should 'require a destination filename' do
-      assert_raise(S3Helper::BlankFileNameException) { @helper.rename('path', 'old_filename', nil) }
+      assert_raise(S3::BlankFileNameException) { @helper.rename('path', 'old_filename', nil) }
     end
 
     should 'create a new file with contents of the old one' do
@@ -300,7 +300,7 @@ class S3HelperTest < Test::Unit::TestCase
     end
 
     should 'require a filename' do
-      assert_raise(S3Helper::BlankFileNameException) { @helper.authenticated_url('path', nil) }
+      assert_raise(S3::BlankFileNameException) { @helper.authenticated_url('path', nil) }
     end
 
     should 'generate a URL for a filename without a path' do
