@@ -17,6 +17,11 @@ module S3
     attr_accessor :directory
     attr_reader :options
 
+    # Creates the S3Helper objects
+    #
+    # @param [String] bucket The bucket that we want to interact with. This does not create the bucket if it does not already exist
+    # @param [Hash] options Options that will be passed down to Fog for :provider => AWS. Common options we use are: :aws_access_key_id, :aws_secret_access_key, :host, :port, :scheme
+    # @return [S3Helper] the S3Helper object to interact with S3
     def initialize(bucket, options = {})
       raise BlankBucketException.new unless bucket
       @options = options
