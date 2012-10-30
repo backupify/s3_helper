@@ -8,7 +8,7 @@ module S3
   class BlankBucketException < StandardError; end
   class BlankFileNameException < StandardError; end
 
-  class Helper
+  class S3Helper
     include ExceptionHelper::Retry
 
     RETRYABLE_EXCEPTIONS = [Excon::Errors::Error]
