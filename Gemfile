@@ -8,6 +8,9 @@ gem 'log4r'
 
 group :development do
   gem 'minitest-reporters'
+  gem 'ci_reporter'
+  gem 'simplecov'
+  gem 'simplecov-rcov'
   gem 'test-unit'
   gem 'shoulda'
   gem 'mocha', '~> 0.12.1'

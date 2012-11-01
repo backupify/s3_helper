@@ -27,6 +27,7 @@ end
 #Private gem - do not create rubygems.org tasks
 #Jeweler::RubygemsDotOrgTasks.new
 
+require 'ci/reporter/rake/test_unit'
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
