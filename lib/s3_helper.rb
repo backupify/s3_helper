@@ -147,15 +147,10 @@ module S3
     end
 
     def authenticated_url(path, filename, opts={})
-      opts = {:expires_in => 5.minutes}.merge(opts)
       fullpath = validate_path(path, filename)
 
-      # Extract the expiration time from the options.
-      expiration_time = opts[:expires].present? ? opts[:expires] : Time.now + opts[:expires_in]
-      opts.delete(:expires)
-      opts.delete(:expires_in)
-
-      @directory.files.get_https_url(fullpath, expiration_time)
+      # Stip off the extra params because appleton_s3 cannot handle them
+      @directory.files.get_url(fullpath, 0).split("?").first
     end
 
     def connection
