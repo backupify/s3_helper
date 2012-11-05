@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "s3_helper"
-  s.version = "0.5.3"
+  s.version = "0.5.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Andrew Jorgensen"]
-  s.date = "2012-11-01"
+  s.date = "2012-11-05"
   s.description = "This gem abstracts communication with S3"
   s.email = "andrew@backupify.com"
   s.extra_rdoc_files = [
@@ -68,6 +68,9 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<fog>, [">= 1.6.0"])
       s.add_runtime_dependency(%q<log4r>, [">= 0"])
       s.add_development_dependency(%q<minitest-reporters>, [">= 0"])
+      s.add_development_dependency(%q<ci_reporter>, [">= 0"])
+      s.add_development_dependency(%q<simplecov>, [">= 0"])
+      s.add_development_dependency(%q<simplecov-rcov>, [">= 0"])
       s.add_development_dependency(%q<test-unit>, [">= 0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<mocha>, ["~> 0.12.1"])
@@ -81,6 +84,9 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<fog>, [">= 1.6.0"])
       s.add_dependency(%q<log4r>, [">= 0"])
       s.add_dependency(%q<minitest-reporters>, [">= 0"])
+      s.add_dependency(%q<ci_reporter>, [">= 0"])
+      s.add_dependency(%q<simplecov>, [">= 0"])
+      s.add_dependency(%q<simplecov-rcov>, [">= 0"])
       s.add_dependency(%q<test-unit>, [">= 0"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<mocha>, ["~> 0.12.1"])
@@ -95,6 +101,9 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<fog>, [">= 1.6.0"])
     s.add_dependency(%q<log4r>, [">= 0"])
     s.add_dependency(%q<minitest-reporters>, [">= 0"])
+    s.add_dependency(%q<ci_reporter>, [">= 0"])
+    s.add_dependency(%q<simplecov>, [">= 0"])
+    s.add_dependency(%q<simplecov-rcov>, [">= 0"])
     s.add_dependency(%q<test-unit>, [">= 0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<mocha>, ["~> 0.12.1"])
