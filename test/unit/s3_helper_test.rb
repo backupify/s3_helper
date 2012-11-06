@@ -326,89 +326,27 @@ class S3HelperTest < Test::Unit::TestCase
     end
   end
 
-  #should "calculate size of all objects by prefix" do
-  #  redefine_constant("S3::S3Helper::MAX_KEYS", 3) do
-  #
-  #    @connection.put_object('bucket', 'path/a/1', 'x' * 105)
-  #    @connection.put_object('bucket', 'path/a/2', 'x' * 835)
-  #    @connection.put_object('bucket', 'path/a/3', 'x' * 55)
-  #    @connection.put_object('bucket', 'path/a/4', 'x' * 100)
-  #
-  #    assert_equal 1095, @helper.storage_size("path/a/")
-  #  end
-  #end
-  #
-  #should "return a hash of filename => size" do
-  #  redefine_constant("S3::S3Helper::MAX_KEYS", 3) do
-  #
-  #    @connection.put_object('bucket', 'path/a/1', 'x' * 105)
-  #    @connection.put_object('bucket', 'path/a/2', 'x' * 835)
-  #    @connection.put_object('bucket', 'path/a/3', 'x' * 55)
-  #    @connection.put_object('bucket', 'path/a/4', 'x' * 100)
-  #
-  #    expected_output = {
-  #      'path/a/1' => 105,
-  #      'path/a/2' => 835,
-  #      'path/a/3' => 55,
-  #      'path/a/4'=> 100
-  #    }
-  #
-  #    assert_equal expected_output, @helper.file_sizes_for_prefix("path/a/")
-  #  end
-  #end
-  #
-  #should "yield each s3 file metadata entry for a given prefix" do
-  #  redefine_constant("S3::S3Helper::MAX_KEYS", 3) do
-  #
-  #    fake_now = Time.parse('2011-11-15 17:06:34 -0500')
-  #    Time.stubs(:now).returns(fake_now)
-  #
-  #    @connection.put_object('bucket', 'path/a/1', 'x' * 105)
-  #    @connection.put_object('bucket', 'path/a/2', 'x' * 835)
-  #    @connection.put_object('bucket', 'path/a/3', 'x' * 55)
-  #    @connection.put_object('bucket', 'path/a/4', 'x' * 100)
-  #
-  #    expected_response_bodies = [
-  #        {
-  #         "Key"=>"path/a/1",
-  #         "StorageClass"=>"STANDARD",
-  #         "LastModified"=>fake_now,
-  #         "Owner"=>{"DisplayName"=>"owner", "ID"=>"some_id"},
-  #         "Size"=>105
-  #        },
-  #        {
-  #         "Key"=>"path/a/2",
-  #         "StorageClass"=>"STANDARD",
-  #         "LastModified"=>fake_now,
-  #         "Owner"=>{"DisplayName"=>"owner", "ID"=>"some_id"},
-  #         "Size"=>835
-  #        },
-  #        {
-  #         "Key"=>"path/a/3",
-  #         "StorageClass"=>"STANDARD",
-  #         "LastModified"=>fake_now,
-  #         "Owner"=>{"DisplayName"=>"owner", "ID"=>"some_id"},
-  #         "Size"=>55
-  #        },
-  #        {
-  #          "Key"=>"path/a/4",
-  #          "StorageClass"=>"STANDARD",
-  #          "LastModified"=>fake_now,
-  #          "Owner"=>{"DisplayName"=>"owner", "ID"=>"some_id"},
-  #          "Size"=>100
-  #        }
-  #    ]
-  #
-  #    response_count = 0
-  #    @helper.each_s3_metadata_for_prefix("path/a/") do |response|
-  #      expected_response_bodies[response_count].each do |key, expected_value|
-  #        assert_equal expected_value, response[key]
-  #      end
-  #      assert_present response['ETag']
-  #      response_count += 1
-  #    end
-  #
-  #    assert_equal expected_response_bodies.length, response_count
-  #  end
-  #end
+  context 'S3HelperFactory' do
+    should 'create a new S3Helper object' do
+      helper = S3::S3HelperFactory.new_s3_helper('bucket')
+
+      assert helper.is_a? S3::S3Helper
+    end
+
+    should 'accept endpoint configuration' do
+      endpoint_config = { :host => 'localhost', :port => 4567, :scheme => "http" }
+      S3.endpoint_config = endpoint_config
+
+      assert_equal endpoint_config, S3.endpoint_config
+    end
+
+    should 'user configs in S3Helper' do
+      endpoint_config = { :host => 'localhost', :port => 4567, :scheme => "http" }
+      S3.endpoint_config = endpoint_config
+
+      helper = S3::S3HelperFactory.new_s3_helper('bucket')
+
+      assert_equal helper.options, endpoint_config
+    end
+  end
 end
