@@ -9,17 +9,6 @@ module S3
   class BlankBucketException < StandardError; end
   class BlankFileNameException < StandardError; end
 
-  mattr_accessor :endpoint_config
-  self.endpoint_config = {}
-
-  class S3HelperFactory
-
-    def self.new_s3_helper(bucket)
-      return S3Helper.new(bucket, S3.endpoint_config)
-    end
-
-  end
-
   class S3Helper
     include ExceptionHelper::Retry
 

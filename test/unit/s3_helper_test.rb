@@ -335,14 +335,14 @@ class S3HelperTest < Test::Unit::TestCase
 
     should 'accept endpoint configuration' do
       endpoint_config = { :host => 'localhost', :port => 4567, :scheme => "http" }
-      S3.endpoint_config = endpoint_config
+      S3::S3HelperFactory.endpoint_config = endpoint_config
 
-      assert_equal endpoint_config, S3.endpoint_config
+      assert_equal endpoint_config, S3::S3HelperFactory.endpoint_config
     end
 
     should 'user configs in S3Helper' do
       endpoint_config = { :host => 'localhost', :port => 4567, :scheme => "http" }
-      S3.endpoint_config = endpoint_config
+      S3::S3HelperFactory.endpoint_config = endpoint_config
 
       helper = S3::S3HelperFactory.new_s3_helper('bucket')
 
