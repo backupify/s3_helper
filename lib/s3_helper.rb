@@ -6,6 +6,7 @@ require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/module/attribute_accessors'
 
 require 's3/s3_helper_factory'
+require 's3/railtie' if defined?(Rails)
 
 module S3
   class BlankBucketException < StandardError; end
