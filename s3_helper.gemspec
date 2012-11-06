@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "s3_helper"
-  s.version = "0.6.3"
+  s.version = "0.6.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Andrew Jorgensen"]
@@ -47,8 +47,10 @@ Gem::Specification.new do |s|
     "doc/js/jquery.js",
     "doc/method_list.html",
     "doc/top-level-namespace.html",
+    "lib/s3/railtie.rb",
     "lib/s3/s3_helper_factory.rb",
     "lib/s3_helper.rb",
+    "lib/tasks/bootstrap_buckets.rake",
     "s3_helper.gemspec",
     "test/helper.rb",
     "test/unit/s3_helper_test.rb"
