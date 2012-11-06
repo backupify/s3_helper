@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "s3_helper"
-  s.version = "0.5.4"
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Andrew Jorgensen"]
-  s.date = "2012-11-05"
+  s.date = "2012-11-06"
   s.description = "This gem abstracts communication with S3"
   s.email = "andrew@backupify.com"
   s.extra_rdoc_files = [
