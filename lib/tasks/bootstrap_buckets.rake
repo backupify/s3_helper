@@ -1,4 +1,4 @@
-desc 'Creates the buckets at the endpoint configured by S3::S3HelperFactory.endpoint_config. Example: rake bootstrap_buckets[test-bucket]'
+desc 'Creates the buckets at the endpoint configured by S3::S3HelperFactory.endpoint_config from constant ::STORAGE_BUCKETS'
 task :bootstrap_buckets do
   WebMock.allow_net_connect!
 
