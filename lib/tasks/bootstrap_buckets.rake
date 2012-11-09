@@ -1,8 +1,6 @@
 desc 'Creates the buckets at the endpoint configured by S3::S3HelperFactory.endpoint_config from constant ::STORAGE_BUCKETS'
 task :bootstrap_buckets do
-  WebMock.allow_net_connect!
-
-  load File.expand_path(pwd + "/config/initializers/storage.rb")
+  load File.expand_path(Dir.pwd + "/config/initializers/storage.rb")
 
   s3 = Fog::Storage.new({:aws_access_key_id => '', :aws_secret_access_key => '', :provider => 'AWS'}.merge(S3::S3HelperFactory.endpoint_config))
 
