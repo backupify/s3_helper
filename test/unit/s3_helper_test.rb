@@ -306,13 +306,13 @@ class S3HelperTest < Test::Unit::TestCase
     should 'generate a URL for a filename without a path' do
       @connection.put_object('bucket', 'filename', 'some data')
 
-      assert_equal(@connection.get_object_url('bucket', 'filename', Time.now + 5.minutes).split("?").first, @helper.authenticated_url(nil, 'filename'))
+      assert_equal(@connection.get_object_url('bucket', 'filename', Time.now + 5.minutes), @helper.authenticated_url(nil, 'filename'))
     end
 
     should 'generate a URL for a filename with a path' do
       @connection.put_object('bucket', 'path/filename', 'some data')
 
-      assert_equal(@connection.get_object_url('bucket', 'path/filename', Time.now + 5.minutes).split("?").first, @helper.authenticated_url('path', 'filename'))
+      assert_equal(@connection.get_object_url('bucket', 'path/filename', Time.now + 5.minutes), @helper.authenticated_url('path', 'filename'))
     end
 
     should "find the URL, even if object is on the second 'page' of objects" do
@@ -322,7 +322,7 @@ class S3HelperTest < Test::Unit::TestCase
       # The file we care about is now on the second page.
       @connection.put_object('bucket', 'filename', 'some data')
 
-      assert_equal(@connection.get_object_url('bucket', 'filename', Time.now + 5.minutes).split("?").first, @helper.authenticated_url(nil, 'filename'))
+      assert_equal(@connection.get_object_url('bucket', 'filename', Time.now + 5.minutes), @helper.authenticated_url(nil, 'filename'))
     end
   end
 
@@ -334,14 +334,14 @@ class S3HelperTest < Test::Unit::TestCase
     end
 
     should 'accept endpoint configuration' do
-      endpoint_config = { :host => 'localhost', :port => 4567, :scheme => "http" }
+      endpoint_config = { :host => 'localhost', :port => 4567, :scheme => "http", :aws_access_key_id => 'key', :aws_secret_access_key => 'secret' }
       S3::S3HelperFactory.endpoint_config = endpoint_config
 
       assert_equal endpoint_config, S3::S3HelperFactory.endpoint_config
     end
 
     should 'user configs in S3Helper' do
-      endpoint_config = { :host => 'localhost', :port => 4567, :scheme => "http" }
+      endpoint_config = { :host => 'localhost', :port => 4567, :scheme => "http", :aws_access_key_id => 'key', :aws_secret_access_key => 'secret' }
       S3::S3HelperFactory.endpoint_config = endpoint_config
 
       helper = S3::S3HelperFactory.new_s3_helper('bucket')
