@@ -4,6 +4,7 @@ require 'exception_helper'
 require 'active_support/core_ext/object/try'
 require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/module/attribute_accessors'
+require 'active_support/core_ext/numeric/time'
 
 require 's3/s3_helper_factory'
 require 's3/railtie' if defined?(Rails)
@@ -151,10 +152,15 @@ module S3
     end
 
     def authenticated_url(path, filename, opts={})
+      opts = {:expires_in => 5.minutes}.merge(opts)
       fullpath = validate_path(path, filename)
 
-      # Stip off the extra params because appleton_s3 cannot handle them
-      @directory.files.get_url(fullpath, 0).split("?").first
+      # Extract the expiration time from the options.
+      expiration_time = opts[:expires].present? ? opts[:expires] : Time.now + opts[:expires_in]
+      opts.delete(:expires)
+      opts.delete(:expires_in)
+
+      @directory.files.get_https_url(fullpath, expiration_time)
     end
 
     def connection
@@ -224,8 +230,6 @@ module S3
 
       @storage_params = {:provider => 'AWS',
                          :persistent => false,
-                         :aws_access_key_id => '',
-                         :aws_secret_access_key => '',
                          :connection_options => { :retry_limit => 0 }
       }.merge(@options)
 
