@@ -72,7 +72,7 @@ module S3
 
         part_ids = []
 
-        response = @storage.initiate_multipart_upload(@bucket, fullpath)
+        response = @storage.initiate_multipart_upload(@bucket, fullpath, opts)
         begin
           upload_id = response.body['UploadId']
 
