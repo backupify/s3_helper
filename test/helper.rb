@@ -1,3 +1,12 @@
+# enable coverage reports for jenkins only
+if ENV['CI']
+  puts "Enabling simplecov(rcov) for jenkins"
+  require 'simplecov'
+  require 'simplecov-rcov'
+  SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
+  SimpleCov.start
+end
+
 require 'rubygems'
 require 'bundler'
 
@@ -17,15 +26,6 @@ require_relative "../lib/s3_helper"
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
-
-# enable coverage reports for jenkins only
-if ENV['CI']
-  puts "Enabling simplecov(rcov) for jenkins"
-  require 'simplecov'
-  require 'simplecov-rcov'
-  SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
-  SimpleCov.start
-end
 
 class Test::Unit::TestCase
 
