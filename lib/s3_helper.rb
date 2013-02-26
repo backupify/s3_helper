@@ -164,7 +164,7 @@ module S3
     end
 
     def connection
-      @directory.connection
+      @directory.service
     end
 
     def key
