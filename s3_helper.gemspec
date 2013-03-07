@@ -68,7 +68,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<activesupport>, [">= 2.3.5"])
       s.add_runtime_dependency(%q<exception_helper>, [">= 0"])
       s.add_runtime_dependency(%q<excon>, [">= 0"])
-      s.add_runtime_dependency(%q<fog>, [">= 1.6.0"])
+      s.add_runtime_dependency(%q<fog>, [">= 1.9.0"])
       s.add_runtime_dependency(%q<log4r>, [">= 0"])
       s.add_development_dependency(%q<minitest-reporters>, [">= 0"])
       s.add_development_dependency(%q<ci_reporter>, [">= 0"])
