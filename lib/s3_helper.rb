@@ -8,6 +8,7 @@ require 'active_support/core_ext/numeric/time'
 
 require 's3/s3_helper_factory'
 require 's3/railtie' if defined?(Rails)
+require 's3/s3_object'
 
 module S3
   class BlankBucketException < StandardError; end
