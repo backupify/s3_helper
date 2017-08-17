@@ -1,7 +1,7 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 
 gem 'activesupport', '>= 2.3.5'
-gem 'exception_helper', :git => 'git@github.com:backupify/exception_helper.git'
+gem 'exception_helper', :git => 'https://github.com/backupify/exception_helper.git'
 gem 'excon'
 gem 'fog', ">= 1.6.0"
 gem 'log4r'
