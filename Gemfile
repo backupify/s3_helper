@@ -12,9 +12,9 @@ group :development do
   gem 'simplecov'
   gem 'simplecov-rcov'
   gem 'test-unit'
-  gem 'shoulda'
+  gem 'shoulda', '>= 3.2.0'
   gem 'mocha', '~> 0.12.1'
   gem 'bundler'
-  gem 'jeweler'
+  gem 'jeweler', '>= 1.8.5'
   gem 'rdoc'
 end
